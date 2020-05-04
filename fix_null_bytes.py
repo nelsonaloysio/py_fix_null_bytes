@@ -4,7 +4,7 @@
 '''
 Remove null byte characters from file.
 
-usage: fix_null_bytes.py [-h] [-o OUTPUT] input
+usage: fix_null_bytes [-h] [-o OUTPUT] input
 
 positional arguments:
   input                 input file name
@@ -31,7 +31,7 @@ def fix_null_bytes(input_name, output_name=None):
     Note that Bash offers a simple alternative for this:
     $ cat input_file.ext | tr -d '\0' > output_file
     '''
-    print('Removing null bytes...')
+    index = 0
 
     if not output_name:
         name, ext = splitext(basename(input_name))
@@ -40,6 +40,9 @@ def fix_null_bytes(input_name, output_name=None):
     with open(input_name, 'rb') as input_file:
         with open(output_name, 'wb') as output_file:
             for line in input_file:
+                index += 1
+                print('Read %s lines.' % index, end='\r')\
+                if (index/10000).is_integer() else None
                 output_file.write(line.replace(b'\x00', bytes('', 'utf8')))
 
 if __name__ == "__main__":

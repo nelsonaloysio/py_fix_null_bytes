@@ -4,7 +4,7 @@ py_fix_null_bytes
 Remove null byte characters from file.
 
 ```
-usage: fix_null_bytes.py [-h] [-o OUTPUT] input
+usage: fix_null_bytes [-h] [-o OUTPUT] input
 
 positional arguments:
   input                 input file name
